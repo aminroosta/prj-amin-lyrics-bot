@@ -6,7 +6,7 @@ var localStorage = new LocalStorage('./database');
 function get_toekn() {
 	var token = JSON.parse(require('fs').readFileSync('token.json', 'utf8'));
 	if(process.env.OPENSHIFT_NODEJS_PORT)
-		return token.yeybot; // open shift bot
+		return token.amin_lyrics_bot; // open shift bot
 	return token.amindebugbot;
 }
 

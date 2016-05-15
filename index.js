@@ -57,9 +57,12 @@ function run_bot() {
 
 			bot.sendMessage(chatId, 'OK, i will be back with your lyric in a second :)');
 			var url = arr[number];
-			// console.log(url);
+			console.log(url);
 			api.lyric(url)
 			   .then(function(html){
+			   	  if(html.length > 4096) {
+			   	  	html = html.slice(0,4090) + '\n...';
+			   	  }
 				  bot.sendMessage(chatId, html);
 			   })
 				.catch(function(err) {

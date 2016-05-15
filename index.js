@@ -83,7 +83,7 @@ function run_bot() {
 				var list = 'Ok, i\'ve found these songs, type song number to get your lyric\n\n';
 				var number = 1;
 				arr.forEach(function(href){
-			    	var song = href.replace('http://www.metrolyrics.com/','').replace('.html','').replace('-lyrics-','').replace('-', ' ');
+			    	var song = href.replace('http://www.metrolyrics.com/','').replace('.html','').replace('-lyrics-',' ').replace('-', ' ');
 			    	// var artist = href[0];
 			    	// var song = href[1];
 		    		// list += number + ' : ' + song + ' - ' + artist + '\n';

@@ -1,4 +1,5 @@
 var TelegramBot = require('node-telegram-bot-api');
+var api = require('./lyrics_api.js');
 
 function get_toekn() {
 	var token = JSON.parse(require('fs').readFileSync('token.json', 'utf8'));
@@ -26,10 +27,21 @@ function create_bot(token) {
 }
 
 
-var bot = create_bot(get_toekn());
+function run_bot() {
+	var bot = create_bot(get_toekn());
 
-bot.on('message', function (msg) {
-  var chatId = msg.chat.id;
-  bot.sendMessage(chatId, "I'm alive!");
-});
+	bot.on('message', function (msg) {
+	  var chatId = msg.chat.id;
+	  bot.sendMessage(chatId, "I'm alive!");
+	});
+}
+
+//run_bot();
+
+
+api.search('going under')
+	.then(t => console.log(t))
+	.catch(function(err) {console.warn(err); });
+// lyric('http://www.azlyrics.com/lyrics/survivor/eyeofthetiger.html').catch(function(err) {console.warn(err); });
+
 

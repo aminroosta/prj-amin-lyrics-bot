@@ -22,6 +22,7 @@
     "axios": "^0.11.0",
     "cheerio": "^0.20.0",
     "google": "^2.0.0",
+    "node-localstorage": "^1.3.0",
     "node-telegram-bot-api": "^0.21.1"
   }
 }

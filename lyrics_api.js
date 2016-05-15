@@ -5,7 +5,7 @@ google.resultsPerPage = 10;
 
 function search(query) {
 	return new Promise(function(accept, reject){
-		google(query + ' site:azlyrics.com/lyrics', function (err, res){
+		google(query + ' site:www.metrolyrics.com', function (err, res){
 		  if (err) {
 		  	reject(err);
 		  	return;
@@ -16,7 +16,7 @@ function search(query) {
 		  for (var i = 0; i < res.links.length; ++i) {
 		    var link = res.links[i];
 		    var href = link.href;
-		    if(href.startsWith('http://www.azlyrics.com/lyrics/') && href.endsWith('.html')) {
+		    if(href.startsWith('http://www.metrolyrics.com/') && href.endsWith('.html')) {
 		    	ret.push(href);
 		    	// href = href.replace('http://www.azlyrics.com/lyrics/','').replace('.html','').split('/');
 		    	// var artist = href[0];
@@ -39,7 +39,7 @@ function lyric(url){
 		 .then(function(response){
 		 	var page = response.data;
 		 	var $ = cheerio.load(page);
-		 	var divs = $('b + br + br + div');
+		 	var divs = $('#lyrics-body-text');
 		 	// var divs = $('div.container div.row div.text-center div');
 		 	// console.log(divs.text());
 		 	var text = divs.text();

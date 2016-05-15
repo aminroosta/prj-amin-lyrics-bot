@@ -79,10 +79,11 @@ function run_bot() {
 				var list = 'Ok, i\'ve found these songs, type song number to get your lyric\n\n';
 				var number = 1;
 				arr.forEach(function(href){
-			    	href = href.replace('http://www.azlyrics.com/lyrics/','').replace('.html','').split('/');
-			    	var artist = href[0];
-			    	var song = href[1];
-		    		list += number + ' : ' + song + ' - ' + artist + '\n';
+			    	var song = href.replace('http://www.metrolyrics.com/','').replace('.html','').replace('-lyrics-','').replace('-', ' ');
+			    	// var artist = href[0];
+			    	// var song = href[1];
+		    		// list += number + ' : ' + song + ' - ' + artist + '\n';
+		    		list += number + ' : ' + song + '\n';
 		    		number += 1;
 				});
 
@@ -99,6 +100,6 @@ run_bot();
 
 
 // api.search('going under') .then(t => console.log(t)) .catch(function(err) {console.warn(err); });
-// api.lyric('http://www.azlyrics.com/lyrics/survivor/eyeofthetiger.html') .then(t => console.log(t)).catch(function(err) {console.warn(err); });
+// api.lyric('http://www.metrolyrics.com/down-on-my-knees-lyrics-ayo.html') .then(t => console.log(t)).catch(function(err) {console.warn(err); });
 
 

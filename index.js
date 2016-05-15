@@ -35,6 +35,10 @@ function run_bot() {
 	bot.on('message', function (msg) {
 		var chatId = msg.chat.id;
 		var text = msg.text;
+		if(text === '/start') {
+			bot.sendMessage(chatId, "Welcome, type the name of a song or a part of it.\nI use google to search for lyrics so even if you remember a single senctence of a song its perfectly fine :-)");
+			return;
+		}
 		if(!text) {
 			bot.sendMessage(chatId, "Type the name of a song to search for.");
 			return;
@@ -55,8 +59,8 @@ function run_bot() {
 			var url = arr[number];
 			// console.log(url);
 			api.lyric(url)
-			   .then(function(text){
-				  bot.sendMessage(chatId, text);
+			   .then(function(html){
+				  bot.sendMessage(chatId, html);
 			   })
 				.catch(function(err) {
 					bot.sendMessage(chatId, 'Oops! i\'m sorry!\n Something went wrong.');

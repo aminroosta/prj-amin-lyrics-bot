@@ -43,6 +43,7 @@ function run_bot() {
 
 		var number = text * 1;
 		if(number) {
+			number -= 1;
 			var arr = localStorage.getItem(chatId);
 			arr = arr && JSON.parse(arr);
 			if(!arr || !arr[number]) {
@@ -52,12 +53,14 @@ function run_bot() {
 
 			bot.sendMessage(chatId, 'OK, i will be back with your lyric in a second :)');
 			var url = arr[number];
+			// console.log(url);
 			api.lyric(url)
 			   .then(function(text){
 				  bot.sendMessage(chatId, text);
 			   })
 				.catch(function(err) {
 					bot.sendMessage(chatId, 'Oops! i\'m sorry!\n Something went wrong.');
+					bot.sendMessage(chatId, JSON.stringify(err));
 				});
 			return;
 		}
@@ -96,6 +99,6 @@ run_bot();
 
 
 // api.search('going under') .then(t => console.log(t)) .catch(function(err) {console.warn(err); });
-// lyric('http://www.azlyrics.com/lyrics/survivor/eyeofthetiger.html').catch(function(err) {console.warn(err); });
+// api.lyric('http://www.azlyrics.com/lyrics/survivor/eyeofthetiger.html') .then(t => console.log(t)).catch(function(err) {console.warn(err); });
 
 

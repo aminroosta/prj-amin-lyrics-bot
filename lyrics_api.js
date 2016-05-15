@@ -33,6 +33,9 @@ function lyric(url){
 		 	var page = response.data;
 		 	var $ = cheerio.load(page);
 		 	var html = $('#lyrics-body-text');
+		 	if(html.length !== 1) {
+		 		throw "Oops! couldn't find the lyric!";
+		 	}
 		 	html.children('p').each(function(inx, p){
 		 		p = $(p);
 		 		p.text('\n' + p.text() +'\n');

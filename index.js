@@ -67,7 +67,8 @@ function run_bot() {
 			   })
 				.catch(function(err) {
 					bot.sendMessage(chatId, 'Oops! i\'m sorry!\n Something went wrong.');
-					bot.sendMessage(chatId, JSON.stringify(err));
+					if(typeof err !== 'string')
+						bot.sendMessage(chatId, JSON.stringify(err));
 				});
 			return;
 		}

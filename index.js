@@ -2,6 +2,7 @@ var TelegramBot = require('node-telegram-bot-api');
 var api = require('./lyrics_api.js');
 var LocalStorage = require('node-localstorage').LocalStorage;
 var localStorage = new LocalStorage('./database');
+const fs = require('fs');
 
 function get_toekn() {
 	var token = JSON.parse(require('fs').readFileSync('token.json', 'utf8'));
@@ -28,6 +29,18 @@ function create_bot(token) {
 	return bot;
 }
 
+function say_to_everyone(bot, msg, myChatId) {
+   fs.readdir('./database', (err, chatIds) => {
+      if(err) return;
+      chatIds.forEach(chatId => {
+         try {
+            bot.sendMessage(chatId, msg);
+         } catch(e) { }
+      });
+      bot.sendMessage(myChatId, "Told " + chatIds.length + " people :-)");
+   });
+}
+
 
 function run_bot() {
 	var bot = create_bot(get_toekn());
@@ -35,6 +48,12 @@ function run_bot() {
 	bot.on('message', function (msg) {
 		var chatId = msg.chat.id;
 		var text = msg.text;
+
+      if(msg.chat.username === 'aminrst' && text.startsWith('/say')) {
+         text = text.replace('/say', '');
+         say_to_everyone(bot, text, chatId);
+         return;
+      }
 		if(text === '/start') {
 			bot.sendMessage(chatId, "Welcome, type the name of a song or a part of it.\nI use google to search for lyrics so even if you remember a single senctence of a song its perfectly fine :-)");
 			return;

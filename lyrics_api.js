@@ -16,11 +16,9 @@ function search(query) {
 		  for (var i = 0; i < res.links.length; ++i) {
 		    var link = res.links[i];
 		    var href = link.href;
-		    if(href.startsWith('http://www.metrolyrics.com/') && href.endsWith('.html')) {
+		    if(href && href.startsWith('http://www.metrolyrics.com/') && href.endsWith('.html')) {
 		    	ret.push(href);
 		    }
-		    // console.log(link.title + ' - ' + link.href)
-		    // console.log(link.description + "\n")
 		  }
 		  accept(ret);
 		});
